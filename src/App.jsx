@@ -84,12 +84,30 @@ function Eye({ position }) {
     mouse.y.set(y);
   }
 
-  useEffect(() =>{
-    window.addEventListener("mousemove",manageMouseMove)
+  // triggers for every touch move
+const manageTouchMove = (e) => {
+  const { innerWidth, innerHeight } = window;
+  // Client touch position
+  const { clientX, clientY } = e.touches[0];
 
-    return () => window.addEventListener("mouse",manageMouseMove)
-  }, [])
+  // value between 0 - 1 depending on where the touch is
+  const x = -0.5 + (clientX / innerWidth);
+  const y = -0.5 + (clientY / innerHeight);
 
+  mouse.x.set(x);
+  mouse.y.set(y);
+};
+
+
+useEffect(() => {
+  window.addEventListener('mousemove', manageMouseMove);
+  window.addEventListener('touchmove', manageTouchMove);
+
+  return () => {
+    window.removeEventListener('mousemove', manageMouseMove);
+    window.removeEventListener('touchmove', manageTouchMove);
+  };
+}, []);
   const rotationSpeed = 0.5
 
   useFrame((state,delta) =>{
