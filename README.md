@@ -16,6 +16,6 @@ This project is a test environment for experimenting with 3D graphics using Java
 ## Mouse Tracking
 The eye follows the mouse cursor using useSpring and useMotionValue from Framer Motion. These hooks create smooth animations for the eye's rotation based on the mouse position.
 
-## Grainy Background
+## Grain Background
 The grainy background effect is achieved using a custom shader. The shader is applied to a large plane positioned behind the eye model.
 
