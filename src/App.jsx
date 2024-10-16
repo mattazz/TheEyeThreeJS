@@ -11,6 +11,9 @@ import {PlaneGeometry} from 'three'
 
 import GrainShader from './grainShader'
 
+
+
+
 function App() {
 
   return (
@@ -46,17 +49,15 @@ function GrainBackground() {
 }
 
 
-function Eye({position}) {
-
-  const eyeball_location = '/assets/eyeball/eyeball.obj';
-  const mtlPath = '/assets/eyeball/eyeball.mtl';
+function Eye({ position }) {
+  const eyeball_location = `${import.meta.env.VITE_BASE_URL}assets/eyeball/eyeball.obj`;
+  const mtlPath = `${import.meta.env.VITE_BASE_URL}assets/eyeball/eyeball.mtl`;
 
   const materials = useLoader(MTLLoader, mtlPath);
-  const eyeball = useLoader(OBJLoader,eyeball_location, (loader)=>{
+  const eyeball = useLoader(OBJLoader, eyeball_location, (loader) => {
     materials.preload();
     loader.setMaterials(materials);
-  } );
-
+  });
   // Gets reference to mesh 
   const mesh = useRef(null);
 
@@ -95,7 +96,7 @@ function Eye({position}) {
     // mesh.current.rotation.x += delta * rotationSpeed;
     const time = state.clock.getElapsedTime()
     mesh.current.position.y = position[1] + Math.sin(time) * 0.5  ;
-    console.log(mesh.current.position.y);
+    // console.log(mesh.current.position.y);
     
   })
   return (
